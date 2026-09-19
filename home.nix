@@ -44,6 +44,7 @@
     oh-my-posh = {
       enable = true;
       enableZshIntegration = true;
+      configFile = ./ohmyposh/zen.toml;
     };
 
   };
