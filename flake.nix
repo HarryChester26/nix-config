@@ -12,6 +12,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     lazyvim.url = "github:pfassina/lazyvim-nix";
   };
 
@@ -22,6 +26,7 @@
       nixpkgs,
       nix-homebrew,
       home-manager,
+      spicetify-nix,
       lazyvim,
     }:
     let
@@ -132,6 +137,8 @@
               users.hiepbui = import ./home.nix;
             };
           }
+
+          spicetify-nix.darwinModules.spicetify
         ];
       };
     };
