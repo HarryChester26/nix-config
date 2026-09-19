@@ -6,6 +6,7 @@
 
     wezterm = {
       enable = true;
+      enableZshIntegration = true;
       extraConfig = builtins.readFile ./wezterm.lua;
     };
 
@@ -28,6 +29,7 @@
 
     zoxide = {
       enable = true;
+      enableZshIntegration = true;
       options = [
         "--cmd cd"
       ];
@@ -35,7 +37,13 @@
 
     eza = {
       enable = true;
+      enableZshIntegration = true;
       icons = "always";
+    };
+
+    oh-my-posh = {
+      enable = true;
+      enableZshIntegration = true;
     };
 
   };
