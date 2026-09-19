@@ -1,4 +1,6 @@
 local wezterm = require("wezterm")
+local constants = require("constants")
+local commands = require("commands")
 local config = wezterm.config_builder()
 
 --- Font settings
@@ -24,6 +26,8 @@ config.window_padding = {
 	top = 0,
 	bottom = 0,
 }
+config.window_background_image = constants.bg_image
+config.macos_window_background_blur = 40
 
 -- Miscellaneous settings
 
@@ -32,8 +36,8 @@ config.prefer_egl = true
 
 -- Custom commands
 
--- wezterm.on("augment-command-palette", function()
--- 	return commands
--- end)
+wezterm.on("augment-command-palette", function()
+	return commands
+end)
 
 return config

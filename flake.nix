@@ -28,6 +28,29 @@
       configuration = { pkgs, ... }: {
         # List packages installed in system profile. To search by name, run:
         # $ nix-env -qaP | grep wget
+        #
+
+        system = {
+          primaryUser = "hiepbui";
+
+          defaults = {
+            dock.autohide = true;
+            dock.persistent-apps = [
+              "${pkgs.wezterm}/Applications/WezTerm.app"
+              "/Applications/Vivaldi.app"
+              "/Applications/Discord.app/"
+              "/Applications/Spotify.app/"
+              "/System/Applications/Calendar.app"
+            ];
+            finder.FXPreferredViewStyle = "clmv";
+
+            NSGlobalDomain = {
+              AppleICUForce24HourTime = true;
+              AppleInterfaceStyle = "Dark";
+              KeyRepeat = 2;
+            };
+          };
+        };
 
         users.users.hiepbui.home = "/Users/hiepbui"; # wtf is this
         security.pam.services.sudo_local.touchIdAuth = true;
@@ -40,6 +63,7 @@
           pkgs.oh-my-posh
           pkgs.gh
           pkgs.statix
+          pkgs.rectangle
           pkgs.nixfmt
 
         ];
@@ -58,7 +82,6 @@
           ];
 
           masApps = {
-
           };
 
           onActivation = {
@@ -67,26 +90,6 @@
             upgrade = true;
           };
 
-        };
-
-        system = {
-          primaryUser = "hiepbui";
-
-          defaults = {
-            dock.autohide = true;
-            dock.persistent-apps = [
-              "${pkgs.wezterm}/Applications/WezTerm.app"
-              "/Applications/Vivaldi.app"
-              "/System/Applications/Calendar.app"
-            ];
-            finder.FXPreferredViewStyle = "clmv";
-
-            NSGlobalDomain = {
-              AppleICUForce24HourTime = true;
-              AppleInterfaceStyle = "Dark";
-              KeyRepeat = 2;
-            };
-          };
         };
 
         # Necessary for using flakes on this system.
