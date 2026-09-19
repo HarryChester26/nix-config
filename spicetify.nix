@@ -1,19 +1,23 @@
-{ pkgs, inputs, ... }:
+{ inputs, pkgs, ... }: {
+  imports = [
+    inputs.spicetify-nix.homeManagerModules.default
+  ];
 
-let
-  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+  programs.spicetify =
+    let
+      spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+    in
+    {
+      enable = true;
+      theme = spicePkgs.themes.starryNight;
 
-in
-{
-  programs.spicetify = {
-    enable = true;
-    enabledExtensions = with spicePkgs.extensions; [
-      adblockify
-      hidePodcasts
-      shuffle
-    ];
-    theme = spicePkgs.themes.starryNight;
-    colorScheme = "base";
-  };
-
+      enabledExtensions = with spicePkgs.extensions; [
+        volumePercentage
+        betterGenres
+        fullScreen
+        spicyLyrics
+        hidePodcasts
+        shuffle
+      ];
+    };
 }

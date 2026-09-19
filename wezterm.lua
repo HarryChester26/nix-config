@@ -28,9 +28,11 @@ config.window_padding = {
 }
 config.window_background_image = constants.bg_image
 config.macos_window_background_blur = 40
+config.native_macos_fullscreen_mode = true
 
 -- Miscellaneous settings
 
+config.enable_scroll_bar = true -- not working
 config.max_fps = 120
 config.prefer_egl = true
 
@@ -39,5 +41,7 @@ config.prefer_egl = true
 wezterm.on("augment-command-palette", function()
 	return commands
 end)
+
+-- Keymap settings
 
 return config

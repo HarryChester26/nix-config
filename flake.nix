@@ -41,14 +41,14 @@
           defaults = {
             dock.autohide = true;
             dock.persistent-apps = [
-              "${pkgs.wezterm}/Applications/WezTerm.app"
+              "/Applications/WezTerm.app/"
               "/Applications/Vivaldi.app"
               "/Applications/Discord.app/"
               "/Applications/Spotify.app/"
               "/System/Applications/Calendar.app"
             ];
-            finder.FXPreferredViewStyle = "clmv";
 
+            finder.FXPreferredViewStyle = "clmv";
             NSGlobalDomain = {
               AppleICUForce24HourTime = true;
               AppleInterfaceStyle = "Dark";
@@ -63,9 +63,7 @@
 
         environment.systemPackages = [
           pkgs.neovim
-          pkgs.wezterm
           pkgs.maccy
-          pkgs.oh-my-posh
           pkgs.gh
           pkgs.statix
           pkgs.rectangle
@@ -134,6 +132,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
+              extraSpecialArgs = { inherit inputs; }; # ????
               users.hiepbui = import ./home.nix;
             };
           }
