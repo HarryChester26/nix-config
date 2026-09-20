@@ -39,16 +39,27 @@
           primaryUser = "hiepbui";
 
           defaults = {
-            dock.autohide = true;
-            dock.persistent-apps = [
-              "/Applications/WezTerm.app/"
-              "/Applications/Vivaldi.app"
-              "/Applications/Discord.app/"
-              "/Applications/Spotify.app/"
-              "/System/Applications/Calendar.app"
-            ];
+            dock = {
+              autohide = true;
+              mru-spaces = false;
+              persistent-apps = [
+                "/Applications/WezTerm.app/"
+                "/Applications/Vivaldi.app"
+                "/Applications/Discord.app/"
+                "/Applications/Spotify.app/"
+                "/System/Applications/Calendar.app"
+              ];
+            };
 
-            finder.FXPreferredViewStyle = "clmv";
+            finder = {
+              AppleShowAllExtensions = true;
+              FXPreferredViewStyle = "clmv";
+              FXRemoveOldTrashItems = true;
+            };
+
+            loginwindow.LoginwindowText = "devops-toolbox";
+            screencapture.location = "~/Pictures/screenshots";
+            screensaver.askForPasswordDelay = 10;
             NSGlobalDomain = {
               AppleICUForce24HourTime = true;
               AppleInterfaceStyle = "Dark";

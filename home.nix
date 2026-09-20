@@ -53,5 +53,10 @@
       configFile = ./ohmyposh/zen.toml;
     };
 
+    omniwm = {
+      enable = true;
+      settings = ./omniwm-settings.toml;
+    };
+
   };
 }
