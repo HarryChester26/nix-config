@@ -57,6 +57,5 @@
       enable = true;
       settings = ./omniwm-settings.toml;
     };
-
   };
 }
