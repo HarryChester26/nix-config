@@ -26,6 +26,7 @@ config.window_padding = {
 	top = 0,
 	bottom = 0,
 }
+config.cursor_blink_rate = 0
 config.window_background_image = constants.bg_image
 config.macos_window_background_blur = 40
 config.native_macos_fullscreen_mode = true

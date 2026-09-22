@@ -74,6 +74,9 @@
 
         environment.systemPackages = [
           pkgs.neovim
+          pkgs.nodejs
+          pkgs.R
+          pkgs.cargo
           pkgs.maccy
           pkgs.gh
           pkgs.statix
