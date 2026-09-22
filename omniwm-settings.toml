@@ -681,11 +681,11 @@ binding = "Unassigned"
 id = "moveWindowToMonitor.down"
 
 [[hotkeys]]
-binding = "Option+Return"
+binding = "Unassigned"
 id = "toggleFullscreen"
 
 [[hotkeys]]
-binding = "Unassigned"
+binding = "Control+Return"
 id = "toggleNativeFullscreen"
 
 [[hotkeys]]

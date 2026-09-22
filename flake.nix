@@ -79,7 +79,9 @@
           pkgs.statix
           pkgs.rectangle
           pkgs.nixfmt
-
+          pkgs.fastfetch
+          pkgs.ripgrep
+          pkgs.lazygit
         ];
 
         fonts.packages = [

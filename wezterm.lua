@@ -36,6 +36,8 @@ config.enable_scroll_bar = true -- not working
 config.max_fps = 120
 config.prefer_egl = true
 
+-- Movement
+
 -- Custom commands
 
 wezterm.on("augment-command-palette", function()
