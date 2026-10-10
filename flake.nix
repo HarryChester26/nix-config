@@ -7,8 +7,13 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
 
+    # home-manager, used for managing user configuration
     home-manager = {
       url = "github:nix-community/home-manager";
+      # The `follows` keyword in inputs is used for inheritance.
+      # Here, `inputs.nixpkgs` of home-manager is kept consistent with
+      # the `inputs.nixpkgs` of the current flake,
+      # to avoid problems caused by different versions of nixpkgs.
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -16,7 +21,6 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    lazyvim.url = "github:pfassina/lazyvim-nix";
   };
 
   outputs =
@@ -27,14 +31,14 @@
       nix-homebrew,
       home-manager,
       spicetify-nix,
-      lazyvim,
     }:
     {
       # Build darwin flake using:
       # $ darwin-rebuild build --flake .#mini
       darwinConfigurations."hb" = nix-darwin.lib.darwinSystem {
-        # A module in NixOS is a self-contained building block used to configure a specific part of your operating system.
+        # pass inputs to submodules, so they can use the downloaded dependencies to config specific part of your operating system
         specialArgs = { inherit inputs; };
+        # A module in NixOS is a self-contained building block used to configure a specific part of your operating system.
         modules = [
           # config file for OS configuration
           ./configuration.nix
@@ -51,12 +55,9 @@
 
           home-manager.darwinModules.home-manager
           {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              # extraSpecialArgs = { inherit inputs; }; # read dependencies from flake inputs as they only available in the flake.nix
-              users.hiepbui = import ./home.nix;
-            };
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.hiepbui = import ./home.nix;
           }
 
           spicetify-nix.darwinModules.spicetify

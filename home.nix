@@ -5,6 +5,13 @@
 }:
 {
   home.stateVersion = "26.11";
+  home.username = "hiepbui";
+  home.homeDirectory = "/Users/hiepbui";
+
+  xresources.properties = {
+    "Xcursor.size" = 16;
+    "Xft.dpi" = 172;
+  };
 
   programs = {
 

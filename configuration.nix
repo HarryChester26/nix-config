@@ -2,7 +2,7 @@
 {
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-  #
+  nixpkgs.config.allowUnfree = true;
 
   system = {
     primaryUser = "hiepbui";
@@ -39,7 +39,6 @@
 
   users.users.hiepbui.home = "/Users/hiepbui"; # wtf is this
   security.pam.services.sudo_local.touchIdAuth = true;
-  nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = [
     pkgs.neovim
@@ -55,6 +54,7 @@
     pkgs.lazygit
     pkgs.fd
     pkgs.gcc
+    pkgs.tor
   ];
 
   fonts.packages = [
