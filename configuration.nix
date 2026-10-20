@@ -54,7 +54,6 @@
     pkgs.lazygit
     pkgs.fd
     pkgs.gcc
-    pkgs.tor
   ];
 
   fonts.packages = [
@@ -68,6 +67,7 @@
       "mas"
     ];
     casks = [
+      "tor-browser"
     ];
 
     masApps = {

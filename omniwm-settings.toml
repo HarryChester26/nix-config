@@ -9,14 +9,14 @@ schemaVersion = 3
 mode = "dark"
 
 [borders]
-enabled = true
+enabled = false
 width = 5.0
 
 [borders.color]
-alpha = 1.0
-blue = 0.979300037944676
-green = 1.0
-red = 0.08458520228437894
+alpha = 0.0
+red = 0.0
+green = 0.0
+blue = 0.0
 
 [clipboard]
 historyEnabled = false
@@ -43,7 +43,7 @@ raiseOnMouseFocus = false
 
 [gaps]
 fullscreenUsesOuterGaps = false
-size = 16.0
+size = 0.0
 
 [gaps.outer]
 bottom = 0.0
@@ -485,19 +485,19 @@ binding = "Unassigned"
 id = "switchWorkspace.previous"
 
 [[hotkeys]]
-binding = "Option+Left Arrow"
+binding = "Control+Shift+H"
 id = "focus.left"
 
 [[hotkeys]]
-binding = "Option+Down Arrow"
+binding = "Control+Shift+J"
 id = "focus.down"
 
 [[hotkeys]]
-binding = "Option+Up Arrow"
+binding = "Control+Shift+K"
 id = "focus.up"
 
 [[hotkeys]]
-binding = "Option+Right Arrow"
+binding = "Control+Shift+L"
 id = "focus.right"
 
 [[hotkeys]]
@@ -977,7 +977,7 @@ binding = "Control+Option+M"
 id = "openMenuAnywhere"
 
 [[hotkeys]]
-binding = "Unassigned"
+binding = "Control+Option+B"
 id = "toggleWorkspaceBarVisibility"
 
 [[hotkeys]]
