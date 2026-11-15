@@ -47,6 +47,8 @@
     pkgs.neovim
     pkgs.typst
     pkgs.lua
+    pkgs.yarn
+    pkgs.nodejs
     pkgs.nodejs
     pkgs.maccy
     pkgs.gh
