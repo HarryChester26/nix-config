@@ -4,6 +4,10 @@
   # $ nix-env -qaP | grep wget
   nixpkgs.config.allowUnfree = true;
 
+  imports = [
+    ./spicetify.nix
+  ];
+
   system = {
     primaryUser = "hiepbui";
 
@@ -15,7 +19,6 @@
           "/Applications/WezTerm.app/"
           "/Applications/Vivaldi.app"
           "/Applications/Discord.app/"
-          "/Applications/Spotify.app/"
           "/System/Applications/Calendar.app"
         ];
       };
@@ -43,6 +46,7 @@
   environment.systemPackages = [
     pkgs.neovim
     pkgs.typst
+    pkgs.lua
     pkgs.nodejs
     pkgs.maccy
     pkgs.gh

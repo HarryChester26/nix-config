@@ -10,9 +10,7 @@
 
       enabledExtensions = with spicePkgs.extensions; [
         volumePercentage
-        betterGenres
         fullScreen
-        spicyLyrics
         hidePodcasts
         shuffle
       ];
