@@ -1,6 +1,7 @@
 local wezterm = require("wezterm")
-local constants = require("constants")
-local commands = require("commands")
+-- Optional local modules (not included in the original uploads).
+local has_constants, constants = pcall(require, "constants")
+local has_commands, commands = pcall(require, "commands")
 local config = wezterm.config_builder()
 
 --- Font settings
@@ -27,9 +28,13 @@ config.window_padding = {
 	bottom = 0,
 }
 config.cursor_blink_rate = 0
-config.window_background_image = constants.bg_image
+if has_constants and type(constants) == "table" and constants.bg_image then
+	config.window_background_image = constants.bg_image
+end
 -- config.macos_window_background_blur = 40
-config.native_macos_fullscreen_mode = true
+if wezterm.target_triple:find("darwin", 1, true) then
+	config.native_macos_fullscreen_mode = true
+end
 
 -- Miscellaneous settings
 
@@ -41,9 +46,11 @@ config.prefer_egl = true
 
 -- Custom commands
 
-wezterm.on("augment-command-palette", function()
-	return commands
-end)
+if has_commands and type(commands) == "table" then
+	wezterm.on("augment-command-palette", function()
+		return commands
+	end)
+end
 
 -- Keymap settings
 
