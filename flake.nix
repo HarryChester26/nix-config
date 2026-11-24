@@ -1,5 +1,5 @@
 {
-  description = "Example nix-darwin system flake";
+  description = "Shared macOS and Ubuntu development environment";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -26,24 +26,23 @@
   outputs =
     inputs@{
       self,
-      nix-darwin,
       nixpkgs,
+      nix-darwin,
       nix-homebrew,
       home-manager,
       spicetify-nix,
+      ...
     }:
+    let
+      ubuntu = import ./hosts/ubuntu.nix;
+    in
     {
-      # Build darwin flake using:
-      # $ darwin-rebuild build --flake .#mini
-      darwinConfigurations."hb" = nix-darwin.lib.darwinSystem {
-        # pass inputs to submodules, so they can use the downloaded dependencies to config specific part of your operating system
+      # macOS: sudo darwin-rebuild switch --flake .#hb
+      darwinConfigurations.hb = nix-darwin.lib.darwinSystem {
         specialArgs = { inherit inputs; };
-        # A module in NixOS is a self-contained building block used to configure a specific part of your operating system.
         modules = [
-          # config file for OS configuration
-          ./configuration.nix
-          { system.configurationRevision = self.rev or self.dirtyRev or null; } # Set Git commit hash for darwin-version.
-
+          ./hosts/macbook.nix
+          { system.configurationRevision = self.rev or self.dirtyRev or null; }
           nix-homebrew.darwinModules.nix-homebrew
           {
             nix-homebrew = {
@@ -52,15 +51,33 @@
               autoMigrate = true;
             };
           }
-
           home-manager.darwinModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.hiepbui = import ./home.nix;
+            home-manager.users.hiepbui.imports = [
+              ./home/common.nix
+              ./home/darwin.nix
+            ];
           }
-
           spicetify-nix.darwinModules.spicetify
+        ];
+      };
+
+      # Ubuntu: home-manager switch --flake .#ubuntu
+      homeConfigurations.ubuntu = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          system = "x86_64-linux";
+          config.allowUnfree = true;
+        };
+        extraSpecialArgs = { inherit inputs ubuntu; };
+        modules = [
+          ./home/common.nix
+          ./home/linux.nix
+        ]
+        ++ nixpkgs.lib.optionals ubuntu.enableSpicetify [
+          spicetify-nix.homeManagerModules.spicetify
+          ./modules/spicetify.nix
         ];
       };
     };

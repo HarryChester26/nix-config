@@ -1,11 +1,11 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 {
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   nixpkgs.config.allowUnfree = true;
 
   imports = [
-    ./spicetify.nix
+    ../modules/spicetify.nix
   ];
 
   system = {
@@ -40,26 +40,12 @@
     };
   };
 
-  users.users.hiepbui.home = "/Users/hiepbui"; # wtf is this
+  users.users.hiepbui.home = "/Users/hiepbui";
   security.pam.services.sudo_local.touchIdAuth = true;
 
-  environment.systemPackages = [
-    pkgs.neovim
-    pkgs.typst
-    pkgs.lua
-    pkgs.yarn
-    pkgs.nodejs
-    pkgs.nodejs
+  environment.systemPackages = (import ../modules/packages.nix { inherit pkgs; }) ++ [
     pkgs.maccy
-    pkgs.gh
-    pkgs.statix
     pkgs.rectangle
-    pkgs.nixfmt
-    pkgs.fastfetch
-    pkgs.ripgrep
-    pkgs.lazygit
-    pkgs.fd
-    pkgs.gcc
   ];
 
   fonts.packages = [
@@ -80,7 +66,7 @@
     };
 
     onActivation = {
-      cleanup = "zap";
+      cleanup = "none"; # Avoid removing unmanaged Homebrew applications.
       autoUpdate = true;
       upgrade = true;
     };
